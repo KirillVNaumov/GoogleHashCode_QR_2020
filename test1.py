@@ -2,8 +2,8 @@ import math
 
 # file = open("a_example.txt")
 # file = open("b_read_on.txt")
-file = open("c_incunabula.txt")
-# file = open("d_tough_choices.txt")
+# file = open("c_incunabula.txt")
+file = open("d_tough_choices.txt")
 # file = open("e_so_many_books.txt")
 # file = open("f_libraries_of_the_world.txt")
 # file = open("my_ex.txt")
@@ -89,17 +89,11 @@ while True:
     best_res = books_score_until_end(list_lib[0], tot_days)
     if (not best_res):
         break 
-    list_of_best = []
-    for i in list_lib:
-        if (books_score_until_end(i, tot_days) != best_res):
-            break
-        list_of_best.append(i)
-    if (len(list_of_best) > 1):
-        list_of_best = sorted(list_of_best, key=lambda lib: lib[1])
-    tot_days = tot_days - list_of_best[0][1]
-    lib_result.append(list_of_best[0])
-    list_lib.remove(list_of_best[0])
+    tot_days = tot_days - list_lib[0][1]
+    lib_result.append(list_lib[0])
+    list_lib.pop(0)
     list_lib = sorted(list_lib, key=lambda lib: books_score_until_end(lib, tot_days), reverse=True)
+
     for i in reversed(range(len(list_lib))):
         if (not books_score_until_end(list_lib[i], tot_days)):
             list_lib.pop(i)
