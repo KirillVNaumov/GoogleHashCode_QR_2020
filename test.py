@@ -1,8 +1,11 @@
-def days_on)onelib(list_lib):
+import math
+
+def days_on_onelib(list_lib):
     sign_up =list_lib[1]
     ship = list_lib[2]
     num_books = list_lib[0]
-    days = sign_up + num_books / ship
+    days = sign_up + math.ceil(num_books / ship)
+    return days
 
 file = open("a_example.txt")
 
@@ -29,4 +32,4 @@ while True:
     list_lib.append(new_elem)
 
 for i in list_lib:
-    print (i)
+    print (days_on_onelib(i))
