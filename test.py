@@ -26,20 +26,12 @@ while True:
     new_elem = list(map(int, line.split()))
     line = file.readline()
     books_tmp = list(map(int, line.split()))
+    books_tmp = list(set(books_tmp)) 
     books_tmp = sorted(books_tmp, key=lambda x: books_scores[x], reverse=True)
     new_elem.append(books_tmp)
     new_elem.append(index)
     list_lib.append(new_elem)
     index += 1
-
-
-# for i in list_lib:
-#     print (i)
-#     # if (len(i) != 5):
-#     #     print ("FALSE")
-#     #     print (i)
-# exit(0)
-
 
 def books_score_until_end(lib, left_days):
     if left_days > days_on_onelib(lib):
@@ -98,11 +90,13 @@ while True:
         list_of_best = sorted(list_of_best, key=lambda lib: lib[1])
     tot_days = tot_days - list_of_best[0][1]
     lib_result.append(list_of_best[0])
+    for i in list_of_best[0][3]:
+        books_scores[i] = 0
     list_lib.remove(list_of_best[0])
-    list_lib = sorted(list_lib, key=lambda lib: books_score_until_end(lib, tot_days), reverse=True)
     for i in reversed(range(len(list_lib))):
         if (not books_score_until_end(list_lib[i], tot_days)):
             list_lib.pop(i)
+    list_lib = sorted(list_lib, key=lambda lib: books_score_until_end(lib, tot_days), reverse=True)
 
 
 print(len(lib_result))
